@@ -1,9 +1,43 @@
-import { AppBar, Toolbar } from "@material-ui/core";
+import {
+    AppBar,
+    Badge,
+    Grid,
+    IconButton,
+    InputBase,
+    Toolbar,
+} from "@material-ui/core";
+import NotificationsNoneIcon from "@material-ui/icons/NotificationsNone";
+import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 const Header = () => {
     return (
         <AppBar position="sticky">
-            <Toolbar></Toolbar>
+            <Toolbar>
+                <Grid container>
+                    <Grid item>
+                        <InputBase />
+                    </Grid>
+                    <Grid sm item></Grid>
+                    <Grid item>
+                        <IconButton>
+                            <Badge badgeContent={4} color="secondary">
+                                <NotificationsNoneIcon />
+                            </Badge>
+                        </IconButton>
+
+                        <IconButton>
+                            <Badge badgeContent={4} color="primary">
+                                <ChatBubbleOutlineIcon />
+                            </Badge>
+                        </IconButton>
+
+                        <Badge badgeContent={4} color="primary">
+                            <ExitToAppIcon />
+                        </Badge>
+                    </Grid>
+                </Grid>
+            </Toolbar>
         </AppBar>
     );
 };
