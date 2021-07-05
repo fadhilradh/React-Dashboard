@@ -12,7 +12,7 @@ import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import SearchIcon from "@material-ui/icons/Search";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
     root: {
         backgroundColor: "white",
     },
@@ -25,10 +25,13 @@ const useStyles = makeStyles({
             backgroundColor: "#f2f2f2",
         },
         "& .MuiSvgIcon-root": {
-            marginRight: "8px",
+            marginRight: theme.spacing(1),
         },
     },
-});
+    shape: {
+        borderRadius: "12px",
+    },
+}));
 
 const Header = () => {
     const classes = useStyles();
