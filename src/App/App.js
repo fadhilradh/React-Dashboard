@@ -7,8 +7,8 @@ import {
     makeStyles,
     ThemeProvider,
 } from "@material-ui/core";
-import PageHeader from "../components/PageHeader";
-import NotificationsNoneIcon from "@material-ui/icons/NotificationsNone";
+
+import Employees from "../pages/Employees";
 
 const theme = createMuiTheme({
     palette: {
@@ -50,11 +50,8 @@ function App() {
             <Sidemenu />
             <div className={classes.appMain}>
                 <Header />
-                <PageHeader
-                    title="Page Header"
-                    subtitle="page desc.."
-                    icon={<NotificationsNoneIcon fontSize="large" />}
-                />
+
+                <Employees />
             </div>
             <CssBaseline />
         </ThemeProvider>
