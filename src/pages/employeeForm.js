@@ -1,7 +1,15 @@
-import { Grid, TextField } from "@material-ui/core";
-import { useState } from "react";
+import { Grid } from "@material-ui/core";
+import Input from "../components/controls/Input";
+import RadioGroup from "../components/controls/RadioGroup";
+
+import { useForm, Form } from "../components/useForm";
 
 const EmployeeForm = () => {
+    const genders = [
+        { id: "male", title: "Male" },
+        { id: "female", title: "Female" },
+    ];
+
     const initialFieldValue = {
         id: 0,
         fullName: "",
@@ -14,26 +22,36 @@ const EmployeeForm = () => {
         isPermanent: false,
     };
 
-    const [values, setValues] = useState(initialFieldValue);
+    const { values, setValues, handleInputChange } = useForm(initialFieldValue);
 
     return (
-        <form>
+        <Form>
             <Grid container>
                 <Grid item xs={6}>
-                    <TextField
+                    <Input
                         label="Full Name"
+                        name="fullName"
+                        onChange={handleInputChange}
                         value={values.fullName}
-                        variant="outlined"
                     />
-                    <TextField
+                    <Input
                         label="Email"
+                        name="email"
+                        onChange={handleInputChange}
                         value={values.email}
-                        variant="outlined"
                     />
                 </Grid>
-                <Grid item=""></Grid>
+                <Grid item xs={6}>
+                    <RadioGroup
+                        name="gender"
+                        label="Gender"
+                        onChange={handleInputChange}
+                        items={genders}
+                        value={values.gender}
+                    />
+                </Grid>
             </Grid>
-        </form>
+        </Form>
     );
 };
 
