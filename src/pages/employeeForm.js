@@ -1,4 +1,5 @@
 import { Grid } from "@material-ui/core";
+import Button from "../components/Button";
 import Checkbox from "../components/controls/Checkbox";
 import DatePicker from "../components/controls/DatePicker";
 import Input from "../components/controls/Input";
@@ -83,6 +84,9 @@ const EmployeeForm = () => {
                         onChange={handleInputChange}
                         value={values.isPermanent}
                     />
+                    <div>
+                        <Button label="Submit" type="submit" />
+                    </div>
                 </Grid>
             </Grid>
         </Form>
