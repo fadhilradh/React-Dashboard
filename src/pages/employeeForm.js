@@ -15,10 +15,10 @@ const EmployeeForm = () => {
     ];
 
     const initialFieldValue = {
-        id: 0,
+        id: null,
         fullName: "",
         email: "",
-        phoneNumber: null,
+        phoneNumber: "",
         city: "",
         gender: "male",
         departmentId: "",
@@ -26,10 +26,41 @@ const EmployeeForm = () => {
         isPermanent: false,
     };
 
-    const { values, setValues, handleInputChange } = useForm(initialFieldValue);
+    const { values, setValues, errors, setErrors, handleInputChange } =
+        useForm(initialFieldValue);
+
+    const validate = () => {
+        let temp = {};
+        temp.fullName = values.fullName ? "" : "This field is required";
+        temp.email =
+            /$^|.+@..+/.test(values.email) && values.email
+                ? ""
+                : "Email is not valid";
+        temp.phoneNumber =
+            values.phoneNumber.length > 9
+                ? ""
+                : "Phone number should be greater than 9 digits";
+        temp.city = values.city ? "" : "This field is required";
+        temp.departmentId =
+            values.departmentId !== 0 ? "" : "This field is required";
+        setErrors({
+            ...temp,
+        });
+        console.log(temp);
+        return Object.values(temp).every((el) => el === "");
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (validate()) {
+            employeeService.addEmployees(values);
+            setValues(initialFieldValue);
+            setErrors([]);
+        }
+    };
 
     return (
-        <Form>
+        <Form onSubmit={handleSubmit}>
             <Grid container>
                 <Grid item xs={6}>
                     <Input
@@ -37,24 +68,28 @@ const EmployeeForm = () => {
                         name="fullName"
                         onChange={handleInputChange}
                         value={values.fullName}
+                        error={errors.fullName}
                     />
                     <Input
                         label="Email"
                         name="email"
                         onChange={handleInputChange}
                         value={values.email}
+                        error={errors.email}
                     />
                     <Input
                         label="Phone Number"
                         name="phoneNumber"
                         onChange={handleInputChange}
                         value={values.phoneNumber}
+                        error={errors.phoneNumber}
                     />
                     <Input
                         label="City"
                         name="city"
                         onChange={handleInputChange}
                         value={values.city}
+                        error={errors.city}
                     />
                 </Grid>
                 <Grid item xs={6}>

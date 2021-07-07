@@ -5,7 +5,7 @@ import {
     Select as MuiSelect,
 } from "@material-ui/core";
 
-const Select = ({ name, label, value, onChange, options }) => {
+const Select = ({ name, label, value, onChange, options, error }) => {
     return (
         <FormControl variant="outlined">
             <InputLabel>{label}</InputLabel>

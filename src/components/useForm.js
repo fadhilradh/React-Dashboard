@@ -3,6 +3,7 @@ import { useState } from "react";
 
 export const useForm = (initialFieldValue) => {
     const [values, setValues] = useState(initialFieldValue);
+    const [errors, setErrors] = useState({});
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -15,6 +16,8 @@ export const useForm = (initialFieldValue) => {
     return {
         values,
         setValues,
+        errors,
+        setErrors,
         handleInputChange,
     };
 };
@@ -28,8 +31,12 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export const Form = ({ children }) => {
+export const Form = ({ children, ...other }) => {
     const classes = useStyles();
 
-    return <form className={classes.root}>{children}</form>;
+    return (
+        <form className={classes.root} {...other}>
+            {children}
+        </form>
+    );
 };
