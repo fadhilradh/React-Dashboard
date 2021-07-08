@@ -39,8 +39,7 @@ const EmployeeForm = ({ addOrEdit, recordForEdit }) => {
                 ? ""
                 : "Phone number should be greater than 9 digits";
         temp.city = values.city ? "" : "This field is required";
-        temp.departmentId =
-            values.departmentId !== 0 ? "" : "This field is required";
+
         setErrors({
             ...temp,
         });
