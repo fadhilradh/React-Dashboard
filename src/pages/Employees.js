@@ -21,6 +21,7 @@ import * as employeeService from "../services/employeeService";
 import ActionButton from "../components/ActionButton";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
+import Notification from "../components/Notification";
 
 const useStyles = makeStyles((theme) => ({
     pageContent: {
@@ -39,21 +40,38 @@ const Employees = () => {
     const [recordForEdit, setRecordForEdit] = useState();
     const [records, setRecords] = useState(getAllEmployees());
     const [openPopUp, setOpenPopup] = useState(false);
+    const [notify, setNotify] = useState({
+        isOpen: false,
+        message: "",
+        type: "",
+    });
 
     function addOrEdit(employee) {
-        employeeService.addEmployees(employee);
+        if (employee.id === 0) {
+            employeeService.addEmployees(employee);
+        } else {
+            employeeService.updateEmployee(employee);
+        }
         setOpenPopup(false);
         setRecords(getAllEmployees());
+        setRecordForEdit(null);
+        setNotify({
+            isOpen: true,
+            message: "Submitted Successfully",
+            type: "success",
+        });
     }
 
-    function editInPopUp(record) {}
+    function editInPopUp(record) {
+        setRecordForEdit(record);
+        setOpenPopup(true);
+    }
 
     const { TableContainer, TableHeader } = useTable(records, headCells);
     return (
         <div>
             <PageHeader
-                title="New Employee"
-                subtitle="Form and validation"
+                title="Employee Management"
                 icon={<PeopleIcon fontSize="large" />}
             />
             <Paper className={classes.pageContent}>
@@ -62,7 +80,10 @@ const Employees = () => {
                     setOpenPopup={setOpenPopup}
                     title="Add New Employee"
                 >
-                    <EmployeeForm addOrEdit={addOrEdit} />
+                    <EmployeeForm
+                        addOrEdit={addOrEdit}
+                        recordForEdit={recordForEdit}
+                    />
                 </PopUpDialog>
                 <Toolbar>
                     <Button
@@ -70,7 +91,10 @@ const Employees = () => {
                         label="Add New"
                         variant="outlined"
                         startIcon={<AddIcon />}
-                        onClick={() => setOpenPopup(true)}
+                        onClick={() => {
+                            setOpenPopup(true);
+                            setRecordForEdit(null);
+                        }}
                     />
                 </Toolbar>
                 <TableContainer>
@@ -105,6 +129,7 @@ const Employees = () => {
                     </TableBody>
                 </TableContainer>
             </Paper>
+            <Notification notify={notify} setNotify={setNotify} />
         </div>
     );
 };

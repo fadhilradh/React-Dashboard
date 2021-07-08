@@ -1,4 +1,5 @@
 import { Grid } from "@material-ui/core";
+import { useEffect } from "react";
 import Button from "../components/Button";
 import Checkbox from "../components/controls/Checkbox";
 import DatePicker from "../components/controls/DatePicker";
@@ -8,7 +9,7 @@ import Select from "../components/controls/Select";
 import { useForm, Form } from "../components/useForm";
 import * as employeeService from "../services/employeeService";
 
-const EmployeeForm = ({ addOrEdit }) => {
+const EmployeeForm = ({ addOrEdit, recordForEdit }) => {
     const genders = ["Male", "Female"];
 
     const initialFieldValue = {
@@ -26,7 +27,7 @@ const EmployeeForm = ({ addOrEdit }) => {
     const { values, setValues, errors, setErrors, handleInputChange } =
         useForm(initialFieldValue);
 
-    const validate = () => {
+    function validate() {
         let temp = {};
         temp.fullName = values.fullName ? "" : "This field is required";
         temp.email =
@@ -45,16 +46,22 @@ const EmployeeForm = ({ addOrEdit }) => {
         });
         console.log(temp);
         return Object.values(temp).every((el) => el === "");
-    };
+    }
 
-    const handleSubmit = (e) => {
+    function handleSubmit(e) {
         e.preventDefault();
         if (validate()) {
             addOrEdit(values);
             setValues(initialFieldValue);
             setErrors([]);
         }
-    };
+    }
+
+    useEffect(() => {
+        if (recordForEdit) {
+            setValues({ ...recordForEdit });
+        }
+    }, [recordForEdit]);
 
     return (
         <Form onSubmit={handleSubmit}>
