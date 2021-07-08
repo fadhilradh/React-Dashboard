@@ -22,6 +22,7 @@ import ActionButton from "../components/ActionButton";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 import Notification from "../components/Notification";
+import ConfirmDelete from "../components/ConfirmDelete";
 
 const useStyles = makeStyles((theme) => ({
     pageContent: {
@@ -45,6 +46,11 @@ const Employees = () => {
         message: "",
         type: "",
     });
+    const [confirmDelete, setConfirmDelete] = useState({
+        isOpen: false,
+        title: "",
+        subtitle: "",
+    });
 
     function addOrEdit(employee) {
         if (employee.id === 0) {
@@ -65,6 +71,20 @@ const Employees = () => {
     function editInPopUp(record) {
         setRecordForEdit(record);
         setOpenPopup(true);
+    }
+
+    function onDelete(id) {
+        setConfirmDelete({
+            ...confirmDelete,
+            isOpen: false,
+        });
+        employeeService.deleteEmployee(id);
+        setRecords(getAllEmployees());
+        setNotify({
+            isOpen: true,
+            message: "Deleted Successfully",
+            type: "error",
+        });
     }
 
     const { TableContainer, TableHeader } = useTable(records, headCells);
@@ -120,7 +140,20 @@ const Employees = () => {
                                         <EditOutlinedIcon />
                                     </ActionButton>
 
-                                    <ActionButton color="primary">
+                                    <ActionButton
+                                        color="primary"
+                                        onClick={() => {
+                                            setConfirmDelete({
+                                                isOpen: true,
+                                                title: "Are you sure you want to delete?",
+                                                subtitle:
+                                                    "You can`t undo this operation",
+                                                onConfirm: () => {
+                                                    onDelete(record.id);
+                                                },
+                                            });
+                                        }}
+                                    >
                                         <DeleteOutlineIcon />
                                     </ActionButton>
                                 </div>
@@ -130,6 +163,10 @@ const Employees = () => {
                 </TableContainer>
             </Paper>
             <Notification notify={notify} setNotify={setNotify} />
+            <ConfirmDelete
+                confirmDelete={confirmDelete}
+                setConfirmDelete={setConfirmDelete}
+            />
         </div>
     );
 };

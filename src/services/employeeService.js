@@ -33,3 +33,9 @@ export function getAllEmployees() {
     }
     return JSON.parse(localStorage.getItem(keys.employees));
 }
+
+export function deleteEmployee(id) {
+    let employees = getAllEmployees();
+    employees = employees.filter((x) => x.id !== id);
+    localStorage.setItem(keys.employees, JSON.stringify(employees));
+}
