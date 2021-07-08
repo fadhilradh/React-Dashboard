@@ -1,6 +1,6 @@
 import PageHeader from "../components/PageHeader";
 import PeopleIcon from "@material-ui/icons/People";
-import EmployeeForm from "./EmployeeForm.js";
+import EmployeeForm from "./EmployeeForm";
 import useTable from "../components/useTable";
 import {
     makeStyles,
@@ -16,7 +16,6 @@ import Button from "../components/Button";
 import AddIcon from "@material-ui/icons/Add";
 import PopUpDialog from "../components/PopUpDialog";
 import headCells from "../lib/tableHeaders";
-import { useEffect } from "react";
 import * as employeeService from "../services/employeeService";
 import ActionButton from "../components/ActionButton";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
