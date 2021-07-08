@@ -8,7 +8,7 @@ import Select from "../components/controls/Select";
 import { useForm, Form } from "../components/useForm";
 import * as employeeService from "../services/employeeService";
 
-const EmployeeForm = () => {
+const EmployeeForm = ({ addOrEdit }) => {
     const genders = ["Male", "Female"];
 
     const initialFieldValue = {
@@ -50,7 +50,7 @@ const EmployeeForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (validate()) {
-            employeeService.addEmployees(values);
+            addOrEdit(values);
             setValues(initialFieldValue);
             setErrors([]);
         }
