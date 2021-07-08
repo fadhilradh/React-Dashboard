@@ -1,1 +1,1 @@
-Employee management dashboard using React and Material UI with notifications
+Employee management dashboard using React and Material UI with notifications and local storage
