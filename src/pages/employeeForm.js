@@ -60,7 +60,7 @@ const EmployeeForm = ({ addOrEdit, recordForEdit }) => {
         if (recordForEdit) {
             setValues({ ...recordForEdit });
         }
-    }, [recordForEdit]);
+    }, [recordForEdit, setValues]);
 
     return (
         <Form onSubmit={handleSubmit}>
