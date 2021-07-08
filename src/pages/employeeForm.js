@@ -9,10 +9,7 @@ import { useForm, Form } from "../components/useForm";
 import * as employeeService from "../services/employeeService";
 
 const EmployeeForm = () => {
-    const genders = [
-        { id: "male", title: "Male" },
-        { id: "female", title: "Female" },
-    ];
+    const genders = ["Male", "Female"];
 
     const initialFieldValue = {
         id: null,

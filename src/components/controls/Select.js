@@ -15,9 +15,9 @@ const Select = ({ name, label, value, onChange, options, error }) => {
                 label={label}
                 onChange={onChange}
             >
-                {options.map((option) => (
-                    <MenuItem key={option.id} value={option.id}>
-                        {option.title}
+                {options.map((option, index) => (
+                    <MenuItem key={index} value={option}>
+                        {option}
                     </MenuItem>
                 ))}
             </MuiSelect>
