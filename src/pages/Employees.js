@@ -1,6 +1,6 @@
 import PageHeader from "../components/PageHeader";
 import PeopleIcon from "@material-ui/icons/People";
-import EmployeeForm from "./EmployeeForm";
+import EmployeeForm from "./EmployeeForm.js";
 import useTable from "../components/useTable";
 import {
     makeStyles,
