@@ -5,7 +5,7 @@ import {
     TableHead,
     TableRow,
 } from "@material-ui/core";
-import { useState } from "react";
+// import { useState } from "react";
 
 const useStyles = makeStyles((theme) => ({
     table: {
@@ -29,8 +29,8 @@ const useTable = (records, headCells) => {
         <Table className={classes.table}>{props.children}</Table>
     );
 
-    const pages = [5, 10, 25];
-    const [page, setPage] = useState(0);
+    // const pages = [5, 10, 25];
+    // const [page, setPage] = useState(0);
 
     const classes = useStyles();
     const TableHeader = (props) => {
