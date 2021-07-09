@@ -53,8 +53,10 @@ const Employees = () => {
 
     function addOrEdit(employee) {
         if (employee.id === 0) {
+            console.log(employee);
             employeeService.addEmployees(employee);
         } else {
+            console.log(employee);
             employeeService.updateEmployee(employee);
         }
         setOpenPopup(false);
@@ -126,7 +128,9 @@ const Employees = () => {
                                 <TableCell>{record.email}</TableCell>
                                 <TableCell>{record.phoneNumber}</TableCell>
                                 <TableCell>{record.city}</TableCell>
-                                <TableCell>{record.isPermanent}</TableCell>
+                                <TableCell>
+                                    {record.isPermanent ? "Yes" : "No"}
+                                </TableCell>
                                 <TableCell>{record.hireDate}</TableCell>
                                 <TableCell>{record.departmentId}</TableCell>
                                 <div>
