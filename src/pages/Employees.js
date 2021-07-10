@@ -22,6 +22,9 @@ import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 import Notification from "../components/Notification";
 import ConfirmDelete from "../components/ConfirmDelete";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { addEmployee } from "../redux/actions/employees.action";
 
 const useStyles = makeStyles((theme) => ({
     pageContent: {
@@ -38,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
 const Employees = () => {
     const classes = useStyles();
     const [recordForEdit, setRecordForEdit] = useState();
-    const [records, setRecords] = useState(getAllEmployees());
+    const records = useSelector((state) => state.employees);
     const [openPopUp, setOpenPopup] = useState(false);
     const [notify, setNotify] = useState({
         isOpen: false,
@@ -51,16 +54,15 @@ const Employees = () => {
         subtitle: "",
     });
 
+    const dispatch = useDispatch();
+
     function addOrEdit(employee) {
         if (employee.id === 0) {
-            console.log(employee);
-            employeeService.addEmployees(employee);
+            dispatch(addEmployee(employee));
         } else {
-            console.log(employee);
-            employeeService.updateEmployee(employee);
+            // employeeService.updateEmployee(employee);
         }
         setOpenPopup(false);
-        setRecords(getAllEmployees());
         setRecordForEdit(null);
         setNotify({
             isOpen: true,
@@ -80,7 +82,6 @@ const Employees = () => {
             isOpen: false,
         });
         employeeService.deleteEmployee(id);
-        setRecords(getAllEmployees());
         setNotify({
             isOpen: true,
             message: "Deleted Successfully",
@@ -88,7 +89,7 @@ const Employees = () => {
         });
     }
 
-    const { TableContainer, TableHeader } = useTable(records, headCells);
+    const { TableContainer, TableHeader } = useTable(headCells);
     return (
         <div>
             <PageHeader
@@ -131,9 +132,9 @@ const Employees = () => {
                                 <TableCell>
                                     {record.isPermanent ? "Yes" : "No"}
                                 </TableCell>
-                                <TableCell>{record.hireDate}</TableCell>
+                                {/* <TableCell>{record.hireDate}</TableCell> */}
                                 <TableCell>{record.departmentId}</TableCell>
-                                <div>
+                                <td>
                                     <ActionButton
                                         color="primary"
                                         onClick={() => {
@@ -159,7 +160,7 @@ const Employees = () => {
                                     >
                                         <DeleteOutlineIcon />
                                     </ActionButton>
-                                </div>
+                                </td>
                             </TableRow>
                         ))}
                     </TableBody>

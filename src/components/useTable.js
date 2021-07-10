@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const useTable = (records, headCells) => {
+const useTable = (headCells) => {
     const TableContainer = (props) => (
         <Table className={classes.table}>{props.children}</Table>
     );

@@ -23,10 +23,10 @@ const headCells = [
         id: "isPermanent",
         label: "Permanent",
     },
-    {
-        id: "hireDate",
-        label: "Hire Date",
-    },
+    // {
+    //     id: "hireDate",
+    //     label: "Hire Date",
+    // },
     {
         id: "department",
         label: "Department",

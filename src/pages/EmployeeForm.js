@@ -7,13 +7,14 @@ import Input from "../components/controls/Input";
 import RadioGroup from "../components/controls/RadioGroup";
 import Select from "../components/controls/Select";
 import { useForm, Form } from "../components/useForm";
+import { addEmployee } from "../redux/actions/employees.action";
 import * as employeeService from "../services/employeeService";
 
 const EmployeeForm = ({ addOrEdit, recordForEdit }) => {
     const genders = ["Male", "Female"];
 
     const initialFieldValue = {
-        id: null,
+        id: Math.floor(Math.random() * 1000),
         fullName: "",
         email: "",
         phoneNumber: "",
